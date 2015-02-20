@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.border.EmptyBorder;
 import net.proteanit.sql.DbUtils;
 import javax.swing.table.*;
 import org.jdesktop.swingx.JXDatePicker;
@@ -59,7 +60,8 @@ public class SchedulerUI extends javax.swing.JFrame {
             /**This populates the table with the values returned by the database*/
             profManageTaskTable.setModel(DbUtils.resultSetToTableModel(rs));
         } catch(Exception e) {
-            //JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, e.getStackTrace());
         }
     }
     /**
@@ -90,7 +92,7 @@ public class SchedulerUI extends javax.swing.JFrame {
             adminStudentTable.setModel(DbUtils.resultSetToTableModel(rs));
         } 
         catch(Exception e) {
-            //JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, e.getStackTrace());
         }
     }
     /**
@@ -126,7 +128,7 @@ public class SchedulerUI extends javax.swing.JFrame {
             }
         } 
         catch(Exception e) {
-            //JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, e.getStackTrace());
         }
     }
 
@@ -148,7 +150,7 @@ public class SchedulerUI extends javax.swing.JFrame {
         currentYear = realYear;
     }
     /**
-     * This method will refresh the calendar every time the month is changed
+     * This method will refresh the calendar
      * @param month - This is the month to repopulate the calendar with
      * @param year - This is the year to repopulate the calendar with
      */
@@ -170,10 +172,28 @@ public class SchedulerUI extends javax.swing.JFrame {
         nod = cal.getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
         som = cal.get(GregorianCalendar.DAY_OF_WEEK);
         
+        //String selectedCourse = calendarCourseComboBox.getSelectedItem().toString();
+        
         for (int i=1; i<=nod; i++){
-            int row = new Integer((i+som-2)/7);
-            int column = (i+som-2)%7;
-            calendarTable.setValueAt(i, row, column);
+            String day = i + "";
+            if(i < 10) {
+                day = "0" + day;
+            }
+            try {
+                String em = "";
+                String sql = "SELECT taskName FROM tasks WHERE taskDate LIKE \"%" + day + " " + currentYear + "%\"";
+                pst = conn.prepareStatement(sql);
+                rs = pst.executeQuery();
+                while(rs.next()){
+                    em = "- " + rs.getString(1) + "\n";
+                }
+                int row = new Integer((i+som-2)/7);
+                int column = (i+som-2)%7;
+                calendarTable.setValueAt((i + "\n" + em), row, column);
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.getStackTrace());
+            }
+            
         }
         monthLabel.setText(months[month]);
         yearLabel.setText(String.valueOf(year));
@@ -200,7 +220,7 @@ public class SchedulerUI extends javax.swing.JFrame {
             stmt.executeUpdate(sql);
         }
         catch(Exception e){
-            //JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, e.getStackTrace());
         }
     }
     /**
@@ -276,7 +296,7 @@ public class SchedulerUI extends javax.swing.JFrame {
             }
         }
         catch(Exception e) {
-            //JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, e.getStackTrace());
         }
         return conflicts;
     }
@@ -575,6 +595,11 @@ public class SchedulerUI extends javax.swing.JFrame {
         optionPanel.setBackground(new java.awt.Color(90, 45, 135));
 
         calendarCourseComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Course1", "Course2", "Course3" }));
+        calendarCourseComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calendarCourseComboBoxActionPerformed(evt);
+            }
+        });
 
         filterComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All", "Tests", "Quizzes", "Projects", "Homeworks" }));
 
@@ -708,7 +733,7 @@ public class SchedulerUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        calendarTable.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        calendarTable.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         calendarTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"", null, null, null, null, null, null},
@@ -732,8 +757,13 @@ public class SchedulerUI extends javax.swing.JFrame {
         });
         calendarTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         calendarTable.setFillsViewportHeight(true);
+        calendarTable.setGridColor(new java.awt.Color(0, 0, 0));
         calendarTable.setOpaque(false);
         calendarTable.setRowHeight(100);
+        calendarTable.setDefaultRenderer(Object.class, new MultiLineCellRenderer());
+        calendarTable.setRowSelectionAllowed(false);
+        calendarTable.setSelectionBackground(new java.awt.Color(90, 45, 135));
+        calendarTable.setSelectionForeground(new java.awt.Color(90, 45, 135));
         calendarTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         calendarTable.getTableHeader().setReorderingAllowed(false);
         calendarTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -899,11 +929,9 @@ public class SchedulerUI extends javax.swing.JFrame {
                     .addComponent(typeTaskComboBox))
                 .addGap(18, 18, 18)
                 .addGroup(addAssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(addAssignmentPanelLayout.createSequentialGroup()
-                        .addComponent(taskDatePicker, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-                        .addGap(2, 2, 2))
+                    .addComponent(taskDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(suggestButton)
                 .addGap(18, 18, 18)
                 .addGroup(addAssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1350,7 +1378,7 @@ public class SchedulerUI extends javax.swing.JFrame {
                 passPasswordField.setText("");
             }
         } catch(Exception e) {
-            //JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, e.getStackTrace());
         }
     }//GEN-LAST:event_loginButtonActionPerformed
     /**
@@ -1443,7 +1471,7 @@ public class SchedulerUI extends javax.swing.JFrame {
             rs = pst.executeQuery();
             profManageStudentTable.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, e.getStackTrace());
         }
     }//GEN-LAST:event_manageProfRemoveStudentButtonActionPerformed
     /**
@@ -1537,6 +1565,10 @@ public class SchedulerUI extends javax.swing.JFrame {
         card.show(mainPanel, "calendarCard");
     }//GEN-LAST:event_cancelTaskButtonActionPerformed
 
+    private void calendarCourseComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calendarCourseComboBoxActionPerformed
+        //refreshCalendar(currentMonth, currentYear);
+    }//GEN-LAST:event_calendarCourseComboBoxActionPerformed
+
     /**
      * This will run the entire program
      */
@@ -1566,6 +1598,37 @@ public class SchedulerUI extends javax.swing.JFrame {
             }
         });
     }
+class MultiLineCellRenderer extends JTextArea implements TableCellRenderer {
+
+  public MultiLineCellRenderer() {
+    setLineWrap(true);
+    setWrapStyleWord(true);
+    setOpaque(true);
+  }
+
+  public Component getTableCellRendererComponent(JTable table, Object value,
+      boolean isSelected, boolean hasFocus, int row, int column) {
+    if (isSelected) {
+      setForeground(table.getSelectionForeground());
+      setBackground(table.getSelectionBackground());
+    } else {
+      setForeground(table.getForeground());
+      setBackground(table.getBackground());
+    }
+    setFont(table.getFont());
+    if (hasFocus) {
+      setBorder(UIManager.getBorder("Table.focusCellHighlightBorder"));
+      if (table.isCellEditable(row, column)) {
+        setForeground(UIManager.getColor("Table.focusCellForeground"));
+        setBackground(UIManager.getColor("Table.focusCellBackground"));
+      }
+    } else {
+      setBorder(new EmptyBorder(1, 2, 1, 2));
+    }
+    setText((value == null) ? "" : value.toString());
+    return this;
+  }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aboutButton;
