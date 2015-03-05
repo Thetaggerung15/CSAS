@@ -26,6 +26,8 @@ public class SchedulerUI extends javax.swing.JFrame {
     ResultSet rs = null;
     /**This is the PreparedStatment for sending queries to the database*/
     PreparedStatement pst = null;
+    
+    boolean firstInit = true;
     /**
      * Creates new form SchedulerUI
      */
@@ -255,51 +257,7 @@ public class SchedulerUI extends javax.swing.JFrame {
         }
         return nextThreeDays;
     }
-    /**
-     * 
-     * @param dates - Dates to be tested for conflicts
-     * @return Returns a 2D array of dates and conflicts.
-     * @throws java.io.IOException
-     */
-    public int[] scheduler(String[] dates) throws IOException, SQLException{
-        int[] conflicts = new int[5];
-        ArrayList<String> courses = new ArrayList<String>();
-        try {
-            /**This is the current value in the ComboBox on the Add Assignment Screen*/
-            String selectedCourse = addAssignmentCourseComboBox.getSelectedItem().toString();
-            /**This is the query to be sent to the database*/
-            String sql = "SELECT * FROM students WHERE studSchedule LIKE \"%" + selectedCourse + "%\"";
-            pst = conn.prepareStatement(sql);
-            rs = pst.executeQuery();
-        
-            while(rs.next()) {
-                /**These are the values returned by the database in String form*/
-                String em = rs.getString(2);
-                /**This will hold the individual courses that the user is teaching*/
-                String[] arr = em.split(" ");
-                for(int i=0; i < arr.length; i++){
-                    courses.add(arr[i]);
-                }
-            }
-            for(int i=0; i<dates.length; i++) {
-                for(int j=0; j<courses.size(); j++) {
-                    sql = "SELECT * FROM tasks WHERE taskCourse=? AND taskDate=?";
-                    pst=conn.prepareStatement(sql);
-                    pst.setString(1, courses.get(j));
-                    pst.setString(2, dates[i]);
-                    rs=pst.executeQuery();
-                    
-                    while(rs.next()) {
-                        conflicts[i]++;
-                    }
-                }
-            }
-        }
-        catch(Exception e) {
-            JOptionPane.showMessageDialog(null, e.getStackTrace());
-        }
-        return conflicts;
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1362,9 +1320,10 @@ public class SchedulerUI extends javax.swing.JFrame {
             rs=pst.executeQuery();
             
             if(rs.next()) {
-                updateCourseCombo();
                 initializeCal();
+                updateCourseCombo();
                 refreshCalendar(currentMonth, currentYear);
+                firstInit = false;
                 CardLayout card = (CardLayout)mainPanel.getLayout();
                 card.show(mainPanel, "calendarCard");
             }
@@ -1524,11 +1483,13 @@ public class SchedulerUI extends javax.swing.JFrame {
      * This will suggest the next three days for an assignment to be scheduled
      */
     private void suggestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suggestButtonActionPerformed
+        Algorithm al = new Algorithm();
+        String selectedCourse = addAssignmentCourseComboBox.getSelectedItem().toString();
         String[] days = new String[5];
         int[] conflicts = new int[5];
         days = nextThreeDays();
         try {
-            conflicts = scheduler(days);
+            conflicts = al.scheduler(days, selectedCourse);
         }
         catch (IOException ex) {
             //Logger.getLogger(SchedulerUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -1566,7 +1527,9 @@ public class SchedulerUI extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelTaskButtonActionPerformed
 
     private void calendarCourseComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calendarCourseComboBoxActionPerformed
-        //refreshCalendar(currentMonth, currentYear);
+        if(firstInit == false) {
+            refreshCalendar(currentMonth, currentYear);
+        }
     }//GEN-LAST:event_calendarCourseComboBoxActionPerformed
 
     /**
@@ -1598,37 +1561,7 @@ public class SchedulerUI extends javax.swing.JFrame {
             }
         });
     }
-class MultiLineCellRenderer extends JTextArea implements TableCellRenderer {
 
-  public MultiLineCellRenderer() {
-    setLineWrap(true);
-    setWrapStyleWord(true);
-    setOpaque(true);
-  }
-
-  public Component getTableCellRendererComponent(JTable table, Object value,
-      boolean isSelected, boolean hasFocus, int row, int column) {
-    if (isSelected) {
-      setForeground(table.getSelectionForeground());
-      setBackground(table.getSelectionBackground());
-    } else {
-      setForeground(table.getForeground());
-      setBackground(table.getBackground());
-    }
-    setFont(table.getFont());
-    if (hasFocus) {
-      setBorder(UIManager.getBorder("Table.focusCellHighlightBorder"));
-      if (table.isCellEditable(row, column)) {
-        setForeground(UIManager.getColor("Table.focusCellForeground"));
-        setBackground(UIManager.getColor("Table.focusCellBackground"));
-      }
-    } else {
-      setBorder(new EmptyBorder(1, 2, 1, 2));
-    }
-    setText((value == null) ? "" : value.toString());
-    return this;
-  }
-}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aboutButton;
