@@ -62,8 +62,8 @@ public class SchedulerUI extends javax.swing.JFrame {
             /**This populates the table with the values returned by the database*/
             profManageTaskTable.setModel(DbUtils.resultSetToTableModel(rs));
         } catch(Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-            JOptionPane.showMessageDialog(null, e.getStackTrace());
+            //JOptionPane.showMessageDialog(null, e);
+            //JOptionPane.showMessageDialog(null, e.getStackTrace());
         }
     }
     /**
@@ -118,6 +118,7 @@ public class SchedulerUI extends javax.swing.JFrame {
             
             /**This will hold the individual courses that the user is teaching*/
             String[] arr = null;
+            calendarCourseComboBox.addItem("All");
             while(rs.next()) {
                 /**These are the values returned by the database in String form*/
                 String em = rs.getString(1);
@@ -174,8 +175,8 @@ public class SchedulerUI extends javax.swing.JFrame {
         nod = cal.getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
         som = cal.get(GregorianCalendar.DAY_OF_WEEK);
         
-        //String selectedCourse = calendarCourseComboBox.getSelectedItem().toString();
-        
+        String selectedCourse = calendarCourseComboBox.getSelectedItem().toString();
+        String selectedTask = filterComboBox.getSelectedItem().toString();
         for (int i=1; i<=nod; i++){
             String day = i + "";
             if(i < 10) {
@@ -183,16 +184,37 @@ public class SchedulerUI extends javax.swing.JFrame {
             }
             try {
                 String em = "";
-                String sql = "SELECT taskName FROM tasks WHERE taskDate LIKE \"%" + day + " " + currentYear + "%\"";
+                String sql = null;
+                if(selectedCourse.equals("All") && selectedTask.equals("All")) {
+                    sql = "SELECT * FROM tasks WHERE (taskDate LIKE \"%" + day + 
+                        " " + currentYear + "%\")";
+                }
+                else if(selectedCourse.equals("All")) {
+                    sql = "SELECT * FROM tasks WHERE (taskName LIKE \"%" + 
+                        selectedTask + "%\") AND (taskDate LIKE \"%" + day + 
+                        " " + currentYear + "%\")";
+                }
+                else if(selectedTask.equals("All")) {
+                    sql = "SELECT * FROM tasks WHERE (taskCourse LIKE \"%" + 
+                        selectedCourse + "%\") AND (taskDate LIKE \"%" + day + 
+                        " " + currentYear + "%\")";
+                }
+                else {
+                    sql = "SELECT * FROM tasks WHERE (taskName LIKE \"%" + 
+                        selectedTask + "%\") AND (taskCourse LIKE \"%" + 
+                        selectedCourse + "%\") AND (taskDate LIKE \"%" + day + 
+                        " " + currentYear + "%\")";
+                }
                 pst = conn.prepareStatement(sql);
                 rs = pst.executeQuery();
                 while(rs.next()){
-                    em = "- " + rs.getString(1) + "\n";
+                    em = em + "- " + rs.getString(1) + "\n";
                 }
                 int row = new Integer((i+som-2)/7);
                 int column = (i+som-2)%7;
                 calendarTable.setValueAt((i + "\n" + em), row, column);
-            } catch (SQLException e) {
+            } 
+            catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, e.getStackTrace());
             }
             
@@ -210,7 +232,7 @@ public class SchedulerUI extends javax.swing.JFrame {
             Statement stmt = conn.createStatement();
             /**This is the date chosen by the user*/
             String chosenDate = taskDatePicker.getDate().toString();
-            chosenDate = chosenDate.replaceAll(" [0-9]+:[0-9]+:[0-9]+ EST", "");
+            chosenDate = chosenDate.replaceAll(" [0-9]+:[0-9]+:[0-9]+ E[S|D]T", "");
             /**This is the type of assignment that the user selected*/
             String selectedType = typeTaskComboBox.getSelectedItem().toString();
             /**This is the selected course for the assignment*/
@@ -249,7 +271,7 @@ public class SchedulerUI extends javax.swing.JFrame {
             }
             else {
                 String temp = c.getTime().toString();
-                temp = temp.replaceAll(" [0-9]+:[0-9]+:[0-9]+ EST", "");
+                temp = temp.replaceAll(" [0-9]+:[0-9]+:[0-9]+ E[S|D]T", "");
                 nextThreeDays[count] = temp;
                 c.add(Calendar.DAY_OF_YEAR, 1);
                 count++;
@@ -310,15 +332,10 @@ public class SchedulerUI extends javax.swing.JFrame {
         assignTaskButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         suggestButton = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        firstDateLabel = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         firstLabel = new javax.swing.JLabel();
         thirdLabel = new javax.swing.JLabel();
         secondLabel = new javax.swing.JLabel();
         cancelTaskButton = new javax.swing.JButton();
-        fourthDateLabel = new javax.swing.JLabel();
-        fifthDateLabel = new javax.swing.JLabel();
         fourthLabel = new javax.swing.JLabel();
         thirdLabel2 = new javax.swing.JLabel();
         taskDatePicker = new org.jdesktop.swingx.JXDatePicker();
@@ -559,7 +576,12 @@ public class SchedulerUI extends javax.swing.JFrame {
             }
         });
 
-        filterComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All", "Tests", "Quizzes", "Projects", "Homeworks" }));
+        filterComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All", "Test", "Quiz", "Project", "Homework" }));
+        filterComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filterComboBoxActionPerformed(evt);
+            }
+        });
 
         addAssignmentButton.setText("Add Assignment");
         addAssignmentButton.addActionListener(new java.awt.event.ActionListener() {
@@ -654,7 +676,7 @@ public class SchedulerUI extends javax.swing.JFrame {
                         .addComponent(yearLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1295, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1300, Short.MAX_VALUE)
                 .addGroup(optionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(courseLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(filterLabel, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -760,7 +782,7 @@ public class SchedulerUI extends javax.swing.JFrame {
         addAssignmentPanel.setBackground(new java.awt.Color(90, 45, 135));
 
         typeTaskComboBox.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        typeTaskComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Test", "Quiz", "Project", "Homework" }));
+        typeTaskComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Test", "Quiz", "Project", "Homework", "Out-of-Class" }));
 
         addAssignmentCourseComboBox.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         addAssignmentCourseComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Course1", "Course2", "Course3", "Course4" }));
@@ -787,18 +809,6 @@ public class SchedulerUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("2nd Date:");
-
-        firstDateLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        firstDateLabel.setForeground(new java.awt.Color(255, 255, 255));
-        firstDateLabel.setText("1st Date:");
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("3rd Date:");
-
         firstLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         firstLabel.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -816,14 +826,6 @@ public class SchedulerUI extends javax.swing.JFrame {
             }
         });
 
-        fourthDateLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        fourthDateLabel.setForeground(new java.awt.Color(255, 255, 255));
-        fourthDateLabel.setText("4th Date:");
-
-        fifthDateLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        fifthDateLabel.setForeground(new java.awt.Color(255, 255, 255));
-        fifthDateLabel.setText("5th Date:");
-
         fourthLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         fourthLabel.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -834,26 +836,18 @@ public class SchedulerUI extends javax.swing.JFrame {
         addAssignmentPanel.setLayout(addAssignmentPanelLayout);
         addAssignmentPanelLayout.setHorizontalGroup(
             addAssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(addAssignmentPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addAssignmentPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(addAssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(addAssignmentPanelLayout.createSequentialGroup()
+                .addGroup(addAssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(fourthLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(thirdLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(secondLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(firstLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, addAssignmentPanelLayout.createSequentialGroup()
                         .addComponent(typeTaskComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(taskDescTextField))
-                    .addGroup(addAssignmentPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(thirdLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(addAssignmentPanelLayout.createSequentialGroup()
-                        .addComponent(firstDateLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(firstLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(addAssignmentPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(secondLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(addAssignmentPanelLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, addAssignmentPanelLayout.createSequentialGroup()
                         .addGroup(addAssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(addAssignmentCourseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(addAssignmentPanelLayout.createSequentialGroup()
@@ -866,14 +860,7 @@ public class SchedulerUI extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cancelTaskButton)))
                         .addGap(0, 1491, Short.MAX_VALUE))
-                    .addGroup(addAssignmentPanelLayout.createSequentialGroup()
-                        .addComponent(fifthDateLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(thirdLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(addAssignmentPanelLayout.createSequentialGroup()
-                        .addComponent(fourthDateLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fourthLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(thirdLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         addAssignmentPanelLayout.setVerticalGroup(
@@ -889,28 +876,18 @@ public class SchedulerUI extends javax.swing.JFrame {
                 .addGroup(addAssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(taskDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(suggestButton)
                 .addGap(18, 18, 18)
-                .addGroup(addAssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(firstDateLabel)
-                    .addComponent(firstLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(firstLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(addAssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(secondLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(secondLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(addAssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(thirdLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(thirdLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(addAssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fourthDateLabel)
-                    .addComponent(fourthLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(fourthLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(addAssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(fifthDateLabel)
-                    .addComponent(thirdLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(thirdLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(177, 177, 177)
                 .addGroup(addAssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(assignTaskButton)
@@ -1351,6 +1328,7 @@ public class SchedulerUI extends javax.swing.JFrame {
      * This will change the screen to the Login Screen 
      */
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
+        firstInit = true;
         CardLayout card = (CardLayout)mainPanel.getLayout();
         card.show(mainPanel, "loginCard");
         userTextField.setText("");
@@ -1402,6 +1380,7 @@ public class SchedulerUI extends javax.swing.JFrame {
         thirdLabel2.setText("");
         CardLayout card = (CardLayout)mainPanel.getLayout();
         card.show(mainPanel, "calendarCard");
+        refreshCalendar(currentMonth, currentYear);
     }//GEN-LAST:event_assignTaskButtonActionPerformed
     /**
      * This will change the screen to the Import Screen
@@ -1485,11 +1464,12 @@ public class SchedulerUI extends javax.swing.JFrame {
     private void suggestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suggestButtonActionPerformed
         Algorithm al = new Algorithm();
         String selectedCourse = addAssignmentCourseComboBox.getSelectedItem().toString();
+        String assignmentType = typeTaskComboBox.getSelectedItem().toString();
         String[] days = new String[5];
         int[] conflicts = new int[5];
         days = nextThreeDays();
         try {
-            conflicts = al.scheduler(days, selectedCourse);
+            conflicts = al.scheduler(days, selectedCourse, assignmentType);
         }
         catch (IOException ex) {
             //Logger.getLogger(SchedulerUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -1497,11 +1477,20 @@ public class SchedulerUI extends javax.swing.JFrame {
         catch (SQLException ex) {
             //Logger.getLogger(SchedulerUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        firstLabel.setText(conflicts[0] + " conflicts on " + days[0]);
-        secondLabel.setText(conflicts[1] + " conflicts on " + days[1]);
-        thirdLabel.setText(conflicts[2] + " conflicts on " + days[2]);
-        fourthLabel.setText(conflicts[3] + " conflicts on " + days[3]);
-        thirdLabel2.setText(conflicts[4] + " conflicts on " + days[4]);
+        if(assignmentType.equals("Out-of-Class")) {
+            firstLabel.setText(conflicts[0] + "");
+            secondLabel.setText(conflicts[1] + "");
+            thirdLabel.setText(conflicts[2] + "");
+            fourthLabel.setText(conflicts[3] + "");
+            thirdLabel2.setText(conflicts[4] + "");
+        }
+        else {
+            firstLabel.setText("1st date: " + conflicts[0] + " conflicts on " + days[0]);
+            secondLabel.setText("2nd date: " + conflicts[1] + " conflicts on " + days[1]);
+            thirdLabel.setText("3rd date: " + conflicts[2] + " conflicts on " + days[2]);
+            fourthLabel.setText("4th date: " + conflicts[3] + " conflicts on " + days[3]);
+            thirdLabel2.setText("5th date: " + conflicts[4] + " conflicts on " + days[4]);
+        }
     }//GEN-LAST:event_suggestButtonActionPerformed
     /**
      * This will open up the assignments for the selected day 
@@ -1531,6 +1520,10 @@ public class SchedulerUI extends javax.swing.JFrame {
             refreshCalendar(currentMonth, currentYear);
         }
     }//GEN-LAST:event_calendarCourseComboBoxActionPerformed
+
+    private void filterComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterComboBoxActionPerformed
+        refreshCalendar(currentMonth, currentYear);
+    }//GEN-LAST:event_filterComboBoxActionPerformed
 
     /**
      * This will run the entire program
@@ -1582,20 +1575,15 @@ public class SchedulerUI extends javax.swing.JFrame {
     private javax.swing.JButton cancelTaskButton;
     private javax.swing.JLabel courseLabel;
     private javax.swing.JLabel errorLabel;
-    private javax.swing.JLabel fifthDateLabel;
     private javax.swing.JFileChooser fileChooser;
     private javax.swing.JComboBox filterComboBox;
     private javax.swing.JLabel filterLabel;
-    private javax.swing.JLabel firstDateLabel;
     private javax.swing.JLabel firstLabel;
-    private javax.swing.JLabel fourthDateLabel;
     private javax.swing.JLabel fourthLabel;
     private javax.swing.JLabel infoLabel1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
