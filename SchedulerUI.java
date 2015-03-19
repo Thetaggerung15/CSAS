@@ -90,11 +90,12 @@ public class SchedulerUI extends javax.swing.JFrame {
             sql = "SELECT * FROM students";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
+            
             /**This populates the table with the values returned by the database*/
             adminStudentTable.setModel(DbUtils.resultSetToTableModel(rs));
         } 
         catch(Exception e) {
-            JOptionPane.showMessageDialog(null, e.getStackTrace());
+            //JOptionPane.showMessageDialog(null, e.getStackTrace());
         }
     }
     /**
@@ -119,6 +120,7 @@ public class SchedulerUI extends javax.swing.JFrame {
             /**This will hold the individual courses that the user is teaching*/
             String[] arr = null;
             calendarCourseComboBox.addItem("All");
+            
             while(rs.next()) {
                 /**These are the values returned by the database in String form*/
                 String em = rs.getString(1);
@@ -131,7 +133,7 @@ public class SchedulerUI extends javax.swing.JFrame {
             }
         } 
         catch(Exception e) {
-            JOptionPane.showMessageDialog(null, e.getStackTrace());
+            //JOptionPane.showMessageDialog(null, e.getStackTrace());
         }
     }
 
@@ -164,6 +166,44 @@ public class SchedulerUI extends javax.swing.JFrame {
         /**This is the number of days in the month and the day that is the start of month*/
         int nod, som;
         
+        String mon = "";
+        if(month == 0) {
+            mon = "Jan";
+        }
+        else if(month == 1) {
+            mon = "Feb";
+        }
+        else if(month == 2) {
+            mon = "Mar";
+        }
+        else if(month == 3) {
+            mon = "Apr";
+        }
+        else if(month == 4) {
+            mon = "May";
+        }
+        else if(month == 5) {
+            mon = "Jun";
+        }
+        else if(month == 6) {
+            mon = "Jul";
+        }
+        else if(month == 7) {
+            mon = "Aug";
+        }
+        else if(month == 8) {
+            mon = "Sep";
+        }
+        else if(month == 9) {
+            mon = "Oct";
+        }
+        else if(month == 10) {
+            mon = "Nov";
+        }
+        else if(month == 11) {
+            mon = "Dec";
+        }
+        
         for (int i=0; i<6; i++){
             for (int j=0; j<7; j++){
                 calendarTable.setValueAt(null, i, j);
@@ -177,6 +217,7 @@ public class SchedulerUI extends javax.swing.JFrame {
         
         String selectedCourse = calendarCourseComboBox.getSelectedItem().toString();
         String selectedTask = filterComboBox.getSelectedItem().toString();
+        
         for (int i=1; i<=nod; i++){
             String day = i + "";
             if(i < 10) {
@@ -186,23 +227,23 @@ public class SchedulerUI extends javax.swing.JFrame {
                 String em = "";
                 String sql = null;
                 if(selectedCourse.equals("All") && selectedTask.equals("All")) {
-                    sql = "SELECT * FROM tasks WHERE (taskDate LIKE \"%" + day + 
+                    sql = "SELECT * FROM tasks WHERE (taskDate LIKE \"%" + mon + " " + day + 
                         " " + currentYear + "%\")";
                 }
                 else if(selectedCourse.equals("All")) {
                     sql = "SELECT * FROM tasks WHERE (taskName LIKE \"%" + 
-                        selectedTask + "%\") AND (taskDate LIKE \"%" + day + 
+                        selectedTask + "%\") AND (taskDate LIKE \"%" + mon + " " + day + 
                         " " + currentYear + "%\")";
                 }
                 else if(selectedTask.equals("All")) {
                     sql = "SELECT * FROM tasks WHERE (taskCourse LIKE \"%" + 
-                        selectedCourse + "%\") AND (taskDate LIKE \"%" + day + 
+                        selectedCourse + "%\") AND (taskDate LIKE \"%" + mon + " " + day + 
                         " " + currentYear + "%\")";
                 }
                 else {
                     sql = "SELECT * FROM tasks WHERE (taskName LIKE \"%" + 
                         selectedTask + "%\") AND (taskCourse LIKE \"%" + 
-                        selectedCourse + "%\") AND (taskDate LIKE \"%" + day + 
+                        selectedCourse + "%\") AND (taskDate LIKE \"%" + mon + " " + day + 
                         " " + currentYear + "%\")";
                 }
                 pst = conn.prepareStatement(sql);
@@ -215,7 +256,7 @@ public class SchedulerUI extends javax.swing.JFrame {
                 calendarTable.setValueAt((i + "\n" + em), row, column);
             } 
             catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, e.getStackTrace());
+                //JOptionPane.showMessageDialog(null, e.getStackTrace());
             }
             
         }
@@ -244,7 +285,7 @@ public class SchedulerUI extends javax.swing.JFrame {
             stmt.executeUpdate(sql);
         }
         catch(Exception e){
-            JOptionPane.showMessageDialog(null, e.getStackTrace());
+            //JOptionPane.showMessageDialog(null, e.getStackTrace());
         }
     }
     /**
@@ -540,7 +581,7 @@ public class SchedulerUI extends javax.swing.JFrame {
                         .addComponent(passLabel1))
                     .addGroup(aboutPanelLayout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 267, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 907, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(aboutPanelLayout.createSequentialGroup()
                         .addComponent(backAboutButton)
@@ -676,7 +717,7 @@ public class SchedulerUI extends javax.swing.JFrame {
                         .addComponent(yearLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1300, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1400, Short.MAX_VALUE)
                 .addGroup(optionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(courseLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(filterLabel, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -713,7 +754,7 @@ public class SchedulerUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        calendarTable.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        calendarTable.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         calendarTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"", null, null, null, null, null, null},
@@ -739,7 +780,7 @@ public class SchedulerUI extends javax.swing.JFrame {
         calendarTable.setFillsViewportHeight(true);
         calendarTable.setGridColor(new java.awt.Color(0, 0, 0));
         calendarTable.setOpaque(false);
-        calendarTable.setRowHeight(100);
+        calendarTable.setRowHeight(120);
         calendarTable.setDefaultRenderer(Object.class, new MultiLineCellRenderer());
         calendarTable.setRowSelectionAllowed(false);
         calendarTable.setSelectionBackground(new java.awt.Color(90, 45, 135));
@@ -859,7 +900,7 @@ public class SchedulerUI extends javax.swing.JFrame {
                                 .addComponent(assignTaskButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cancelTaskButton)))
-                        .addGap(0, 1491, Short.MAX_VALUE))
+                        .addGap(0, 1591, Short.MAX_VALUE))
                     .addComponent(thirdLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -1072,7 +1113,7 @@ public class SchedulerUI extends javax.swing.JFrame {
                     .addGroup(manageProfPanelLayout.createSequentialGroup()
                         .addGap(292, 292, 292)
                         .addComponent(manageProfStudentLabel)
-                        .addContainerGap(1032, Short.MAX_VALUE))
+                        .addContainerGap(1132, Short.MAX_VALUE))
                     .addGroup(manageProfPanelLayout.createSequentialGroup()
                         .addGroup(manageProfPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(manageProfStudentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1243,7 +1284,7 @@ public class SchedulerUI extends javax.swing.JFrame {
                                 .addComponent(manageAdminLogoutButton)
                                 .addGap(311, 311, 311)
                                 .addComponent(adminManageAdminManageLabel)
-                                .addGap(0, 1089, Short.MAX_VALUE)))
+                                .addGap(0, 1189, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
         manageAdminPanelLayout.setVerticalGroup(
@@ -1314,7 +1355,7 @@ public class SchedulerUI extends javax.swing.JFrame {
                 passPasswordField.setText("");
             }
         } catch(Exception e) {
-            JOptionPane.showMessageDialog(null, e.getStackTrace());
+            //JOptionPane.showMessageDialog(null, e.getStackTrace());
         }
     }//GEN-LAST:event_loginButtonActionPerformed
     /**
@@ -1336,14 +1377,14 @@ public class SchedulerUI extends javax.swing.JFrame {
         errorLabel.setText("");
     }//GEN-LAST:event_logoutButtonActionPerformed
     /**
-     * This well change the screen to the Add Assignment Screen 
+     * This will change the screen to the Add Assignment Screen 
      */
     private void addAssignmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAssignmentButtonActionPerformed
         CardLayout card = (CardLayout)mainPanel.getLayout();
         card.show(mainPanel, "addAssignmentCard");
     }//GEN-LAST:event_addAssignmentButtonActionPerformed
     /**
-     * This well change the screen to the Calendar Screen 
+     * This will change the screen to the Calendar Screen 
      */
     private void manageProfBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageProfBackButtonActionPerformed
         CardLayout card = (CardLayout)mainPanel.getLayout();

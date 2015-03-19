@@ -2,6 +2,7 @@
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 
 /*
@@ -42,7 +43,7 @@ public class Algorithm extends SchedulerUI{
                         courses.add(arr[i]);
                     }
                 }
-                String[] hours = new String[12];
+                int[] hours = new int[12];
                 for(int i=0; i<courses.size(); i++) {
                     sql = "SELECT * FROM courses WHERE courseName=?";
                     pst = conn.prepareStatement(sql);
@@ -53,13 +54,25 @@ public class Algorithm extends SchedulerUI{
                         /**These are the values returned by the database in String form*/
                         String em = rs.getString(3);
                         em = em.replaceAll(":[0-9]+", "");
+                        //JOptionPane.showMessageDialog(null, em);
                         String[] hrs = em.split("-");
+                        //JOptionPane.showMessageDialog(null, Arrays.toString(hrs));
+                        for(int j = 0; j < hrs.length; j++) {
+                            int intHours = Integer.parseInt(hrs[j]);
+                            if(7 < intHours && intHours < 13) {
+                                hours[intHours-8]++;
+                            }
+                            else if(0 < intHours && intHours < 8) {
+                                hours[intHours+5]++;
+                            }
+                        }
                         
                     }
                 }
+                JOptionPane.showMessageDialog(null, Arrays.toString(hours));
             }
             catch(Exception e) {
-                JOptionPane.showMessageDialog(null, e.getStackTrace());
+                //JOptionPane.showMessageDialog(null, e.getStackTrace());
             }
             return conflicts;
         }
