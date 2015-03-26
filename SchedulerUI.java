@@ -271,18 +271,45 @@ public class SchedulerUI extends javax.swing.JFrame {
         try {
             /**The statement to be sent to the database to update it*/
             Statement stmt = conn.createStatement();
-            /**This is the date chosen by the user*/
-            String chosenDate = taskDatePicker.getDate().toString();
-            chosenDate = chosenDate.replaceAll(" [0-9]+:[0-9]+:[0-9]+ E[S|D]T", "");
-            /**This is the type of assignment that the user selected*/
-            String selectedType = typeTaskComboBox.getSelectedItem().toString();
-            /**This is the selected course for the assignment*/
-            String selectedCourse = addAssignmentCourseComboBox.getSelectedItem().toString();
-            /**This is the query to be sent to the database*/
-            String sql = "INSERT INTO tasks VALUES (\"" + selectedType + ": " 
+            java.util.Date today = new java.util.Date();
+            java.util.Date selectedDate = taskDatePicker.getDate();
+            if(selectedDate == null) {
+                JOptionPane.showMessageDialog(null, "Please select a date");
+            }
+            else if(taskDescTextField.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Please enter an assignment description");
+            }
+            else if(selectedDate.before(today)) {
+                JOptionPane.showMessageDialog(null, "The selected date is in the past"); 
+            }
+            else if(selectedDate.getDay() == (Calendar.SATURDAY-1) || 
+                    selectedDate.getDay() == (Calendar.SUNDAY-1)) {
+                JOptionPane.showMessageDialog(null, "The selected date is on the weekend"); 
+            }
+            else {
+               /**This is the date chosen by the user*/
+                String chosenDate = selectedDate.toString();
+                chosenDate = chosenDate.replaceAll(" [0-9]+:[0-9]+:[0-9]+ E[S|D]T", "");
+                /**This is the type of assignment that the user selected*/
+                String selectedType = typeTaskComboBox.getSelectedItem().toString();
+                /**This is the selected course for the assignment*/
+                String selectedCourse = addAssignmentCourseComboBox.getSelectedItem().toString();
+                /**This is the query to be sent to the database*/
+                String sql = "INSERT INTO tasks VALUES (\"" + selectedType + ": " 
                     + taskDescTextField.getText() + "\", \"" + selectedCourse 
                     + "\", \"" + chosenDate + "\")";
-            stmt.executeUpdate(sql);
+                stmt.executeUpdate(sql);
+                
+                taskDescTextField.setText("");
+                firstLabel.setText("");
+                secondLabel.setText("");
+                thirdLabel.setText("");
+                fourthLabel.setText("");
+                thirdLabel2.setText("");
+                CardLayout card = (CardLayout)mainPanel.getLayout();
+                card.show(mainPanel, "calendarCard");
+                refreshCalendar(currentMonth, currentYear);
+            }
         }
         catch(Exception e){
             //JOptionPane.showMessageDialog(null, e.getStackTrace());
@@ -1413,15 +1440,6 @@ public class SchedulerUI extends javax.swing.JFrame {
      */
     private void assignTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignTaskButtonActionPerformed
         scheduleTask();
-        taskDescTextField.setText("");
-        firstLabel.setText("");
-        secondLabel.setText("");
-        thirdLabel.setText("");
-        fourthLabel.setText("");
-        thirdLabel2.setText("");
-        CardLayout card = (CardLayout)mainPanel.getLayout();
-        card.show(mainPanel, "calendarCard");
-        refreshCalendar(currentMonth, currentYear);
     }//GEN-LAST:event_assignTaskButtonActionPerformed
     /**
      * This will change the screen to the Import Screen
