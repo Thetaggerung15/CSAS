@@ -86,7 +86,7 @@
                       <Component id="errorLabel" min="-2" pref="21" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Component id="loginButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="110" max="32767" attributes="0"/>
+                      <EmptySpace pref="256" max="32767" attributes="0"/>
                       <Component id="aboutButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -260,7 +260,7 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jScrollPane3" min="-2" pref="450" max="-2" attributes="0"/>
-                              <EmptySpace pref="589" max="32767" attributes="0"/>
+                              <EmptySpace pref="722" max="32767" attributes="0"/>
                               <Component id="jScrollPane2" min="-2" pref="450" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -285,7 +285,7 @@
                           <Component id="jScrollPane2" max="32767" attributes="0"/>
                           <Component id="jScrollPane3" pref="320" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="249" max="32767" attributes="0"/>
+                      <EmptySpace pref="395" max="32767" attributes="0"/>
                       <Component id="backAboutButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -406,7 +406,7 @@
                   <Group type="102" attributes="0">
                       <Component id="optionPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="calendarScrollPane" pref="562" max="32767" attributes="0"/>
+                      <Component id="calendarScrollPane" pref="708" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -436,7 +436,7 @@
                                   <Component id="jButton4" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="1038" max="32767" attributes="0"/>
+                          <EmptySpace pref="1171" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="courseLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="filterLabel" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -740,63 +740,52 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="fourthLabel" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="firstLabel" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="secondLabel" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="thirdLabel" max="32767" attributes="0"/>
+                                      <Component id="fifthLabel" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                                      <Component id="suggestButton" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="fourthLabel" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="thirdLabel" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="rangePanel" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="taskDetailPanel" alignment="0" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="assignTaskButton" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="cancelTaskButton" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="firstLabel" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="suggestButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="addAssignmentCourseComboBox" min="-2" pref="135" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="typeTaskComboBox" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="taskDatePicker" min="-2" pref="177" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="taskDescTextField" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="secondLabel" alignment="0" max="32767" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Component id="fifthLabel" max="32767" attributes="0"/>
-                                      <EmptySpace min="-2" pref="513" max="-2" attributes="0"/>
+                                      <EmptySpace min="144" pref="351" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="jSeparator2" min="-2" pref="519" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="4" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="jSeparator3" alignment="1" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jSeparator1" min="-2" pref="50" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="930" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="1061" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="addAssignmentCourseComboBox" pref="41" max="32767" attributes="0"/>
-                          <Component id="typeTaskComboBox" max="32767" attributes="0"/>
-                          <Component id="taskDatePicker" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="taskDetailPanel" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="taskDescTextField" min="-2" pref="28" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
-                      <EmptySpace pref="218" max="32767" attributes="0"/>
+                      <Component id="rangePanel" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="242" max="-2" attributes="0"/>
                       <Component id="suggestButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       <Component id="firstLabel" min="-2" pref="29" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="secondLabel" min="-2" pref="29" max="-2" attributes="0"/>
@@ -806,59 +795,17 @@
                       <Component id="fourthLabel" min="-2" pref="29" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="fifthLabel" min="-2" pref="29" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                      <Component id="jSeparator3" min="-2" pref="10" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="assignTaskButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cancelTaskButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="assignTaskButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JComboBox" name="typeTaskComboBox">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Times New Roman" size="24" style="0"/>
-                </Property>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="5">
-                    <StringItem index="0" value="Test"/>
-                    <StringItem index="1" value="Quiz"/>
-                    <StringItem index="2" value="Project"/>
-                    <StringItem index="3" value="Homework"/>
-                    <StringItem index="4" value="Out-of-Class"/>
-                  </StringArray>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="addAssignmentCourseComboBox">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Times New Roman" size="24" style="0"/>
-                </Property>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Course1"/>
-                    <StringItem index="1" value="Course2"/>
-                    <StringItem index="2" value="Course3"/>
-                    <StringItem index="3" value="Course4"/>
-                  </StringArray>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="taskDescTextField">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Times New Roman" size="18" style="0"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="2"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JButton" name="assignTaskButton">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -942,22 +889,205 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="org.jdesktop.swingx.JXDatePicker" name="taskDatePicker">
+            <Container class="javax.swing.JPanel" name="taskDetailPanel">
               <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Times New Roman" size="18" style="0"/>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="87" green="2d" red="5a" type="rgb"/>
+                </Property>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder roundedCorners="true">
+                      <Color PropertyName="color" blue="ff" green="ff" red="ff" type="rgb"/>
+                    </LineBorder>
+                  </Border>
                 </Property>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JSeparator" name="jSeparator1">
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="addAssignmentCourseComboBox" min="-2" pref="135" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="typeTaskComboBox" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="taskDatePicker" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="taskDescTextField" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="typeTaskComboBox" alignment="1" max="32767" attributes="0"/>
+                              <Component id="addAssignmentCourseComboBox" alignment="1" max="32767" attributes="0"/>
+                              <Component id="taskDatePicker" alignment="1" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="taskDescTextField" min="-2" pref="28" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JComboBox" name="typeTaskComboBox">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="24" style="0"/>
+                    </Property>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="5">
+                        <StringItem index="0" value="Test"/>
+                        <StringItem index="1" value="Quiz"/>
+                        <StringItem index="2" value="Project"/>
+                        <StringItem index="3" value="Homework"/>
+                        <StringItem index="4" value="Out-of-Class"/>
+                      </StringArray>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="typeTaskComboBoxActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JTextField" name="taskDescTextField">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="18" style="0"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
+                  </Properties>
+                </Component>
+                <Component class="org.jdesktop.swingx.JXDatePicker" name="taskDatePicker">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="18" style="0"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="addAssignmentCourseComboBox">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="24" style="0"/>
+                    </Property>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="4">
+                        <StringItem index="0" value="Course1"/>
+                        <StringItem index="1" value="Course2"/>
+                        <StringItem index="2" value="Course3"/>
+                        <StringItem index="3" value="Course4"/>
+                      </StringArray>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addAssignmentCourseComboBoxActionPerformed"/>
+                  </Events>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="rangePanel">
               <Properties>
-                <Property name="orientation" type="int" value="1"/>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="87" green="2d" red="5a" type="rgb"/>
+                </Property>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder roundedCorners="true">
+                      <Color PropertyName="color" blue="ff" green="ff" red="ff" type="rgb"/>
+                    </LineBorder>
+                  </Border>
+                </Property>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JSeparator" name="jSeparator2">
-            </Component>
-            <Component class="javax.swing.JSeparator" name="jSeparator3">
-            </Component>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="startDatePicker" alignment="0" min="-2" pref="177" max="-2" attributes="0"/>
+                              <Component id="firstLabel1" alignment="0" min="-2" pref="177" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="endDatePicker" alignment="1" min="-2" pref="192" max="-2" attributes="0"/>
+                              <Component id="firstLabel2" alignment="1" min="-2" pref="192" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="firstLabel1" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                              <Component id="firstLabel2" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="endDatePicker" alignment="3" max="32767" attributes="0"/>
+                              <Component id="startDatePicker" alignment="3" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="org.jdesktop.swingx.JXDatePicker" name="endDatePicker">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="18" style="0"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="endDatePickerActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="org.jdesktop.swingx.JXDatePicker" name="startDatePicker">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="18" style="0"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="startDatePickerActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="firstLabel1">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="18" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Start Date:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="firstLabel2">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="18" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="End Date:"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="manageProfPanel">
@@ -990,7 +1120,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="292" max="-2" attributes="0"/>
                               <Component id="manageProfStudentLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="834" max="32767" attributes="0"/>
+                              <EmptySpace pref="967" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -1017,7 +1147,7 @@
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="taskProfTabbedPane" pref="537" max="32767" attributes="0"/>
+                              <Component id="taskProfTabbedPane" pref="683" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                               <Component id="manageProfStudentPanel" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -1303,12 +1433,12 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="manageAdminCoursesStudentsTabbedPane" max="32767" attributes="0"/>
+                                  <Component id="manageAdminTabbedPane" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Component id="manageAdminLogoutButton" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="311" max="-2" attributes="0"/>
                                       <Component id="adminManageAdminManageLabel" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="871" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="1004" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -1326,7 +1456,7 @@
                           <Component id="adminManageAdminManageLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="manageAdminCoursesStudentsTabbedPane" pref="515" max="32767" attributes="0"/>
+                      <Component id="manageAdminTabbedPane" pref="661" max="32767" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="manageAdminCoursePanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -1395,7 +1525,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JTabbedPane" name="manageAdminCoursesStudentsTabbedPane">
+            <Container class="javax.swing.JTabbedPane" name="manageAdminTabbedPane">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
               <SubComponents>
