@@ -5,28 +5,28 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
+ * The Algorithm class handles checking for conflicts.
  *
- * @author the taggerung 15
+ * @author Hunter Rice and Samuel Clement
  */
 public class Algorithm extends SchedulerUI{
     /**
-     * 
+     * The scheduler method takes a array of dates, course and assignment. It checks for conflicts and returns the count.
+     *
      * @param dates - Dates to be tested for conflicts
      * @param selectedCourse - The course currently displayed in the course ComboBox
-     * @param assignmentType - 
-     * @return Returns a 2D array of dates and conflicts.
+     * @param assignmentType - The assignment type
+     * @return Returns an array of dates and conflicts.
      * @throws java.io.IOException
      */
     public int[] scheduler(String[] dates, String selectedCourse, String assignmentType) throws IOException, SQLException{
-        int[] conflicts = new int[5];
+        /**An int array to hold the possible conflicts on each day.*/
+	int[] conflicts = new int[5];
+		
+        /**An ArrayList to hold the courses.*/
         ArrayList<String> courses = new ArrayList<String>();
+		
         if(assignmentType.equals("Out-of-Class")) {
             try {
                 /**This is the query to be sent to the database*/
@@ -43,7 +43,9 @@ public class Algorithm extends SchedulerUI{
                         courses.add(arr[i]);
                     }
                 }
+		/** Int array of hours */
                 int[] hours = new int[12];
+                
                 for(int i=0; i<courses.size(); i++) {
                     sql = "SELECT * FROM courses WHERE courseName=?";
                     pst = conn.prepareStatement(sql);
@@ -66,7 +68,6 @@ public class Algorithm extends SchedulerUI{
                                 hours[intHours+5]++;
                             }
                         }
-                        
                     }
                 }
                 JOptionPane.showMessageDialog(null, Arrays.toString(hours));
