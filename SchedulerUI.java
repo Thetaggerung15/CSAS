@@ -17,7 +17,7 @@ import org.jdesktop.swingx.JXDatePicker;
  * This is the SchedulerUI that creates the UI, connects to the database, and 
  * implements the scheduling algorithm.
  * @author: Sam Clement and Hunter Rice
- * @date: 5 February 2015
+ * @date: 13 April 2015
  */
 public class SchedulerUI extends javax.swing.JFrame {
     /**
@@ -321,12 +321,12 @@ public class SchedulerUI extends javax.swing.JFrame {
      * @return Returns an array of the next three days from the current day
      */
     public String[] nextThreeDays() {
-        String[] nextThreeDays = new String[50];
+        String[] nextThreeDays = new String[30];
         /**This is the calendar to find the start day*/
         Calendar c = Calendar.getInstance();
         java.util.Date start = startDatePicker.getDate();
         c.setTime(start);
-        c.add(Calendar.DAY_OF_YEAR, 1);
+        //c.add(Calendar.DAY_OF_YEAR, 1);
         
         int count = 0;
         if(c.get(Calendar.DAY_OF_WEEK) == 1 || c.get(Calendar.DAY_OF_WEEK) == 7) {
