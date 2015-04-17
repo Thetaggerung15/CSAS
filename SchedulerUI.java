@@ -386,6 +386,8 @@ public class SchedulerUI extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         calendarPanel = new javax.swing.JPanel();
         optionPanel = new javax.swing.JPanel();
         calendarCourseComboBox = new javax.swing.JComboBox();
@@ -567,7 +569,7 @@ public class SchedulerUI extends javax.swing.JFrame {
                 .addComponent(errorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(loginButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 256, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1628, Short.MAX_VALUE)
                 .addComponent(aboutButton)
                 .addContainerGap())
         );
@@ -594,23 +596,28 @@ public class SchedulerUI extends javax.swing.JFrame {
 
         jTextArea1.setBackground(new java.awt.Color(90, 45, 135));
         jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jTextArea1.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jTextArea1.setForeground(new java.awt.Color(255, 255, 255));
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
-        jTextArea1.setText("My name is Hunter Rice and I am a Computer Science Major at Western Carolina University.\n\n");
+        jTextArea1.setText("My name is Hunter Rice and I am a Computer Science Major at Western Carolina University. I am graduating May 2015 at the age of 20. I like playing video games in my spare time and I will be trying to find a job in the Charlotte area soon.\n\n");
         jTextArea1.setWrapStyleWord(true);
         jScrollPane2.setViewportView(jTextArea1);
 
         jTextArea2.setBackground(new java.awt.Color(90, 45, 135));
         jTextArea2.setColumns(20);
-        jTextArea2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jTextArea2.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jTextArea2.setForeground(new java.awt.Color(255, 255, 255));
         jTextArea2.setLineWrap(true);
         jTextArea2.setRows(5);
         jTextArea2.setText("My name is Sam Clement and I am a Computer Science Major at Western Carolina University.");
         jTextArea2.setWrapStyleWord(true);
         jScrollPane3.setViewportView(jTextArea2);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\the taggerung 15\\Downloads\\sam.jpg")); // NOI18N
+
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\the taggerung 15\\Pictures\\Hunter.PNG")); // NOI18N
+        jLabel2.setText("jLabel2");
 
         javax.swing.GroupLayout aboutPanelLayout = new javax.swing.GroupLayout(aboutPanel);
         aboutPanel.setLayout(aboutPanelLayout);
@@ -619,14 +626,18 @@ public class SchedulerUI extends javax.swing.JFrame {
             .addGroup(aboutPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(aboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(aboutPanelLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, aboutPanelLayout.createSequentialGroup()
                         .addComponent(userLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(passLabel1))
-                    .addGroup(aboutPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 722, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, aboutPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 788, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(aboutPanelLayout.createSequentialGroup()
                         .addComponent(backAboutButton)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -635,17 +646,26 @@ public class SchedulerUI extends javax.swing.JFrame {
         aboutPanelLayout.setVerticalGroup(
             aboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, aboutPanelLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(aboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(userLabel1)
-                    .addComponent(passLabel1))
+                .addGroup(aboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(aboutPanelLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(passLabel1))
+                    .addGroup(aboutPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(userLabel1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(aboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 395, Short.MAX_VALUE)
-                .addComponent(backAboutButton)
-                .addContainerGap())
+                .addGroup(aboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(aboutPanelLayout.createSequentialGroup()
+                        .addGroup(aboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(backAboutButton)
+                        .addContainerGap())
+                    .addGroup(aboutPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 452, Short.MAX_VALUE))))
         );
 
         mainPanel.add(aboutPanel, "about");
@@ -768,7 +788,7 @@ public class SchedulerUI extends javax.swing.JFrame {
                         .addComponent(yearLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1171, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1789, Short.MAX_VALUE)
                 .addGroup(optionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(courseLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(filterLabel, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -866,7 +886,7 @@ public class SchedulerUI extends javax.swing.JFrame {
             .addGroup(calendarPanelLayout.createSequentialGroup()
                 .addComponent(optionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(calendarScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 708, Short.MAX_VALUE))
+                .addComponent(calendarScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 2080, Short.MAX_VALUE))
         );
 
         mainPanel.add(calendarPanel, "calendarCard");
@@ -1046,7 +1066,7 @@ public class SchedulerUI extends javax.swing.JFrame {
                                 .addComponent(assignTaskButton)
                                 .addGap(18, 18, 18)
                                 .addComponent(cancelTaskButton)
-                                .addGap(144, 351, Short.MAX_VALUE)))))
+                                .addGap(144, 969, Short.MAX_VALUE)))))
                 .addGap(1061, 1061, 1061))
         );
         addAssignmentPanelLayout.setVerticalGroup(
@@ -1252,7 +1272,7 @@ public class SchedulerUI extends javax.swing.JFrame {
                     .addGroup(manageProfPanelLayout.createSequentialGroup()
                         .addGap(292, 292, 292)
                         .addComponent(manageProfStudentLabel)
-                        .addContainerGap(967, Short.MAX_VALUE))
+                        .addContainerGap(1585, Short.MAX_VALUE))
                     .addGroup(manageProfPanelLayout.createSequentialGroup()
                         .addGroup(manageProfPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(manageProfStudentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1271,7 +1291,7 @@ public class SchedulerUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(manageProfPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(manageProfPanelLayout.createSequentialGroup()
-                        .addComponent(taskProfTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
+                        .addComponent(taskProfTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 2055, Short.MAX_VALUE)
                         .addGap(11, 11, 11)
                         .addComponent(manageProfStudentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(manageProfCoursePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1291,7 +1311,7 @@ public class SchedulerUI extends javax.swing.JFrame {
         });
 
         manageAdminAddCourseButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        manageAdminAddCourseButton.setText("Add/Remove");
+        manageAdminAddCourseButton.setText("Add");
         manageAdminAddCourseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 manageAdminAddCourseButtonActionPerformed(evt);
@@ -1299,7 +1319,12 @@ public class SchedulerUI extends javax.swing.JFrame {
         });
 
         manageAdminImportCourseButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        manageAdminImportCourseButton.setText("Import");
+        manageAdminImportCourseButton.setText("Remove");
+        manageAdminImportCourseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageAdminImportCourseButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout manageAdminCoursePanelLayout = new javax.swing.GroupLayout(manageAdminCoursePanel);
         manageAdminCoursePanel.setLayout(manageAdminCoursePanelLayout);
@@ -1376,6 +1401,11 @@ public class SchedulerUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        adminProfessorTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                adminProfessorTableMousePressed(evt);
+            }
+        });
         jScrollPane5.setViewportView(adminProfessorTable);
         if (adminProfessorTable.getColumnModel().getColumnCount() > 0) {
             adminProfessorTable.getColumnModel().getColumn(0).setResizable(false);
@@ -1407,6 +1437,11 @@ public class SchedulerUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        adminStudentTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                adminStudentTableMousePressed(evt);
+            }
+        });
         jScrollPane6.setViewportView(adminStudentTable);
         if (adminStudentTable.getColumnModel().getColumnCount() > 0) {
             adminStudentTable.getColumnModel().getColumn(0).setResizable(false);
@@ -1436,7 +1471,7 @@ public class SchedulerUI extends javax.swing.JFrame {
                                 .addComponent(manageAdminLogoutButton)
                                 .addGap(311, 311, 311)
                                 .addComponent(adminManageAdminManageLabel)
-                                .addGap(0, 1004, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
         manageAdminPanelLayout.setVerticalGroup(
@@ -1447,7 +1482,7 @@ public class SchedulerUI extends javax.swing.JFrame {
                     .addComponent(manageAdminLogoutButton)
                     .addComponent(adminManageAdminManageLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(manageAdminTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)
+                .addComponent(manageAdminTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(manageAdminCoursePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -1821,13 +1856,204 @@ public class SchedulerUI extends javax.swing.JFrame {
         JTable table =(JTable) evt.getSource();
         Point p = evt.getPoint();
         int row = table.rowAtPoint(p);
-        if (evt.getClickCount() == 1) {
-            JOptionPane.showMessageDialog(null, table.getValueAt(row, 0).toString());
-        }
-        else if (evt.getClickCount() == 2) {
-            JOptionPane.showMessageDialog(null, "Remove?");
+        if (evt.getClickCount() == 2) {
+            //JOptionPane.showMessageDialog(null, table.getValueAt(row, 0).toString());
+            try {
+                if(manageAdminTabbedPane.getSelectedIndex() == 0) {
+                    String ref = table.getValueAt(row, 0).toString();
+                    
+                    JPanel addProf = new JPanel();
+                    JTextField name = new JTextField(20);
+                    JTextField prof = new JTextField(20);
+                    JTextField time = new JTextField(30);
+                
+                    name.setText(table.getValueAt(row, 0).toString());
+                    prof.setText(table.getValueAt(row, 1).toString());
+                    time.setText(table.getValueAt(row, 2).toString());
+            
+                    addProf.add(new JLabel("Course Name:"));
+                    addProf.add(name);
+                    addProf.add(new JLabel("Professor:"));
+                    addProf.add(prof);
+                    addProf.add(new JLabel("Time:"));
+                    addProf.add(time);
+            
+                    Object result = JOptionPane.showConfirmDialog(null, addProf, "Edit Course", JOptionPane.OK_CANCEL_OPTION);
+                    if(result.toString().equals("0")) {
+                        String profName = name.getText();
+                        String profDep = prof.getText();
+                        String profCourse = time.getText();
+            
+                        /**The statement to be sent to the database to update it*/
+                        Statement stmt = conn.createStatement(); 
+                        String sql = "UPDATE courses SET courseName=\"" + profName + "\", teacher=\"" + profDep
+                        + "\", time=\"" + profCourse + "\" WHERE courseName=\"" + ref + "\"";
+                        stmt.executeUpdate(sql);
+                    } 
+                }
+            } catch (SQLException ex) {
+                    Logger.getLogger(SchedulerUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            updateAdminLists();
         }
     }//GEN-LAST:event_adminCourseTableMousePressed
+
+    private void manageAdminImportCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageAdminImportCourseButtonActionPerformed
+        try {
+            if(manageAdminTabbedPane.getSelectedIndex() == 0) {
+                JPanel addProf = new JPanel();
+                JTextField name = new JTextField(20);
+            
+                addProf.add(new JLabel("Course Name:"));
+                addProf.add(name);
+            
+                Object result = JOptionPane.showConfirmDialog(null, addProf, "Remove Course", JOptionPane.OK_CANCEL_OPTION);
+                if(result.toString().equals("0")) {
+                    String profName = name.getText();
+            
+                    /**The statement to be sent to the database to update it*/
+                    Statement stmt = conn.createStatement(); 
+                    String sql = "DELETE FROM courses WHERE courseName=\"" + profName + "\"";
+                    stmt.executeUpdate(sql);
+                }
+            }
+            else if(manageAdminTabbedPane.getSelectedIndex() == 1) {
+                JPanel addProf = new JPanel();
+                JTextField name = new JTextField(20);
+            
+                addProf.add(new JLabel("Professor Name:"));
+                addProf.add(name);
+            
+                Object result = JOptionPane.showConfirmDialog(null, addProf, "Remove Professor", JOptionPane.OK_CANCEL_OPTION);
+                if(result.toString().equals("0")) {
+                    String profName = name.getText();
+            
+                    /**The statement to be sent to the database to update it*/
+                    Statement stmt = conn.createStatement(); 
+                    String sql = "DELETE FROM professors WHERE profName=\"" + profName + "\"";
+                    stmt.executeUpdate(sql);
+                }
+            }
+            else if(manageAdminTabbedPane.getSelectedIndex() == 2) {
+                JPanel addProf = new JPanel();
+                JTextField name = new JTextField(20);
+            
+                addProf.add(new JLabel("Student Name:"));
+                addProf.add(name);
+            
+                Object result = JOptionPane.showConfirmDialog(null, addProf, "Remove Student", JOptionPane.OK_CANCEL_OPTION);
+                if(result.toString().equals("0")) {
+                    String profName = name.getText();
+            
+                    /**The statement to be sent to the database to update it*/
+                    Statement stmt = conn.createStatement(); 
+                    String sql = "DELETE FROM students WHERE studName=\"" + profName + "\"";
+                    stmt.executeUpdate(sql);
+                }
+            }
+            updateAdminLists();
+        } catch (SQLException ex) {
+            Logger.getLogger(SchedulerUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_manageAdminImportCourseButtonActionPerformed
+
+    private void adminStudentTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adminStudentTableMousePressed
+        JTable table =(JTable) evt.getSource();
+        Point p = evt.getPoint();
+        int row = table.rowAtPoint(p);
+        if (evt.getClickCount() == 2) {
+            //JOptionPane.showMessageDialog(null, table.getValueAt(row, 0).toString());
+            try {
+                if(manageAdminTabbedPane.getSelectedIndex() == 2) {
+                    String ref = table.getValueAt(row, 0).toString();
+                    
+                    JPanel addProf = new JPanel();
+                    JTextField name = new JTextField(20);
+                    JTextField course = new JTextField(30);
+                
+                    name.setText(table.getValueAt(row, 0).toString());
+                    course.setText(table.getValueAt(row, 1).toString());
+            
+                    addProf.add(new JLabel("Name:"));
+                    addProf.add(name);
+                    addProf.add(new JLabel("Schedule:"));
+                    addProf.add(course);
+            
+                    Object result = JOptionPane.showConfirmDialog(null, addProf, "Edit Student", JOptionPane.OK_CANCEL_OPTION);
+                    if(result.toString().equals("0")) {
+                        String profName = name.getText();
+                        String profCourse = course.getText();
+            
+                        /**The statement to be sent to the database to update it*/
+                        Statement stmt = conn.createStatement(); 
+                        String sql = "UPDATE students SET studName=\"" + profName + "\", studSchedule=\"" 
+                        + profCourse + "\" WHERE studName=\"" + ref + "\"";
+                        stmt.executeUpdate(sql);
+                    } 
+                }
+            } catch (SQLException ex) {
+                    Logger.getLogger(SchedulerUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            updateAdminLists();
+        }
+    }//GEN-LAST:event_adminStudentTableMousePressed
+
+    private void adminProfessorTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adminProfessorTableMousePressed
+        JTable table =(JTable) evt.getSource();
+        Point p = evt.getPoint();
+        int row = table.rowAtPoint(p);
+        if (evt.getClickCount() == 2) {
+            //JOptionPane.showMessageDialog(null, table.getValueAt(row, 0).toString());
+            try {
+                if(manageAdminTabbedPane.getSelectedIndex() == 1) {
+                    String ref = table.getValueAt(row, 0).toString();
+                    
+                    JPanel addProf = new JPanel();
+                    JTextField name = new JTextField(20);
+                    JTextField dep = new JTextField(20);
+                    JTextField course = new JTextField(30);
+                    JTextField user = new JTextField(10);
+                    JTextField pass = new JTextField(10);
+                
+                    name.setText(table.getValueAt(row, 0).toString());
+                    dep.setText(table.getValueAt(row, 1).toString());
+                    course.setText(table.getValueAt(row, 2).toString());
+                    user.setText(table.getValueAt(row, 3).toString());
+                    pass.setText(table.getValueAt(row, 4).toString());
+            
+                    addProf.add(new JLabel("Name:"));
+                    addProf.add(name);
+                    addProf.add(new JLabel("Department:"));
+                    addProf.add(dep);
+                    addProf.add(new JLabel("Schedule:"));
+                    addProf.add(course);
+                    addProf.add(new JLabel("Username:"));
+                    addProf.add(user);
+                    addProf.add(new JLabel("Password:"));
+                    addProf.add(pass);
+            
+                    Object result = JOptionPane.showConfirmDialog(null, addProf, "Edit Professor", JOptionPane.OK_CANCEL_OPTION);
+                    if(result.toString().equals("0")) {
+                        String profName = name.getText();
+                        String profDep = dep.getText();
+                        String profCourse = course.getText();
+                        String profUser = user.getText();
+                        String profPass = pass.getText();
+            
+                        /**The statement to be sent to the database to update it*/
+                        Statement stmt = conn.createStatement(); 
+                        String sql = "UPDATE professors SET profName=\"" + profName + "\", department=\"" + profDep
+                        + "\", profSchedule=\"" + profCourse + "\", profUsername=\"" + profUser + "\", profPassword=\"" 
+                        + profPass + "\" WHERE profName=\"" + ref + "\"";
+                        stmt.executeUpdate(sql);
+                    } 
+                }
+            } catch (SQLException ex) {
+                    Logger.getLogger(SchedulerUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            updateAdminLists();
+        }
+    }//GEN-LAST:event_adminProfessorTableMousePressed
     /**
      * This will run the entire program
      */
@@ -1890,6 +2116,8 @@ public class SchedulerUI extends javax.swing.JFrame {
     private javax.swing.JLabel infoLabel1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
