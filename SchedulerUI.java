@@ -83,6 +83,7 @@ public class SchedulerUI extends javax.swing.JFrame {
             rs = pst.executeQuery();
             /**This populates the table with the values returned by the database*/
             adminCourseTable.setModel(DbUtils.resultSetToTableModel(rs));
+            adminCourseTable.setEnabled(false);
             
             /**This is the query to be sent to the database*/
             sql = "SELECT * FROM professors";
@@ -90,6 +91,8 @@ public class SchedulerUI extends javax.swing.JFrame {
             rs = pst.executeQuery();
             /**This populates the table with the values returned by the database*/
             adminProfessorTable.setModel(DbUtils.resultSetToTableModel(rs));
+            adminProfessorTable.setEnabled(false);
+
             
             /**This is the query to be sent to the database*/
             sql = "SELECT * FROM students";
@@ -98,6 +101,8 @@ public class SchedulerUI extends javax.swing.JFrame {
             
             /**This populates the table with the values returned by the database*/
             adminStudentTable.setModel(DbUtils.resultSetToTableModel(rs));
+            adminStudentTable.setEnabled(false);
+
         } 
         catch(Exception e) {
             //JOptionPane.showMessageDialog(null, e.getStackTrace());
@@ -326,9 +331,10 @@ public class SchedulerUI extends javax.swing.JFrame {
         Calendar c = Calendar.getInstance();
         java.util.Date start = startDatePicker.getDate();
         c.setTime(start);
-        //c.add(Calendar.DAY_OF_YEAR, 1);
+        c.add(Calendar.DAY_OF_YEAR, 1);
         
         int count = 0;
+        //JOptionPane.showMessageDialog(null, );
         if(c.get(Calendar.DAY_OF_WEEK) == 1 || c.get(Calendar.DAY_OF_WEEK) == 7) {
             int days = (Calendar.SATURDAY - c.get(Calendar.DAY_OF_WEEK) + 2) % 7;  
             c.add(Calendar.DAY_OF_YEAR, days); 
@@ -1316,6 +1322,7 @@ public class SchedulerUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        adminCourseTable.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         adminCourseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -1335,6 +1342,11 @@ public class SchedulerUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        adminCourseTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                adminCourseTableMousePressed(evt);
+            }
+        });
         jScrollPane4.setViewportView(adminCourseTable);
         if (adminCourseTable.getColumnModel().getColumnCount() > 0) {
             adminCourseTable.getColumnModel().getColumn(0).setResizable(false);
@@ -1344,6 +1356,7 @@ public class SchedulerUI extends javax.swing.JFrame {
 
         manageAdminTabbedPane.addTab("Courses", jScrollPane4);
 
+        adminProfessorTable.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         adminProfessorTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -1374,6 +1387,7 @@ public class SchedulerUI extends javax.swing.JFrame {
 
         manageAdminTabbedPane.addTab("Professors", jScrollPane5);
 
+        adminStudentTable.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         adminStudentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -1638,8 +1652,10 @@ public class SchedulerUI extends javax.swing.JFrame {
         String[] days = new String[5];
         int[] conflicts = new int[5];
         days = nextThreeDays();
+        //JOptionPane.showMessageDialog(null, days[0].toString());
         try {
             conflicts = al.scheduler(days, selectedCourse, assignmentType);
+            JOptionPane.showMessageDialog(null, conflicts[0]);
         }
         catch (IOException ex) {
             //Logger.getLogger(SchedulerUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -1670,7 +1686,7 @@ public class SchedulerUI extends javax.swing.JFrame {
         Point p = evt.getPoint();
         int row = table.rowAtPoint(p);
         if (evt.getClickCount() == 2) {
-            JOptionPane.showMessageDialog(null, null, "" + row, 1); 
+            JOptionPane.showMessageDialog(null, null, "" + row, 1);
         }
     }//GEN-LAST:event_calendarTableMousePressed
 
@@ -1697,7 +1713,33 @@ public class SchedulerUI extends javax.swing.JFrame {
 
     private void manageAdminAddCourseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageAdminAddCourseButtonActionPerformed
         try {
-            if(manageAdminTabbedPane.getSelectedIndex() == 1) {
+            if(manageAdminTabbedPane.getSelectedIndex() == 0) {
+                JPanel addProf = new JPanel();
+                JTextField name = new JTextField(20);
+                JTextField prof = new JTextField(20);
+                JTextField time = new JTextField(30);
+            
+                addProf.add(new JLabel("Course Name:"));
+                addProf.add(name);
+                addProf.add(new JLabel("Professor:"));
+                addProf.add(prof);
+                addProf.add(new JLabel("Time:"));
+                addProf.add(time);
+            
+                Object result = JOptionPane.showConfirmDialog(null, addProf, "Add Course", JOptionPane.OK_CANCEL_OPTION);
+                if(result.toString().equals("0")) {
+                    String profName = name.getText();
+                    String profDep = prof.getText();
+                    String profCourse = time.getText();
+            
+                    /**The statement to be sent to the database to update it*/
+                    Statement stmt = conn.createStatement(); 
+                    String sql = "INSERT INTO courses VALUES (\"" + profName + "\", \"" + profDep
+                        + "\", \"" + profCourse + "\")";
+                    stmt.executeUpdate(sql);
+                }
+            }
+            else if(manageAdminTabbedPane.getSelectedIndex() == 1) {
                 JPanel addProf = new JPanel();
                 JTextField name = new JTextField(20);
                 JTextField dep = new JTextField(20);
@@ -1774,6 +1816,18 @@ public class SchedulerUI extends javax.swing.JFrame {
     private void addAssignmentCourseComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAssignmentCourseComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_addAssignmentCourseComboBoxActionPerformed
+
+    private void adminCourseTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adminCourseTableMousePressed
+        JTable table =(JTable) evt.getSource();
+        Point p = evt.getPoint();
+        int row = table.rowAtPoint(p);
+        if (evt.getClickCount() == 1) {
+            JOptionPane.showMessageDialog(null, table.getValueAt(row, 0).toString());
+        }
+        else if (evt.getClickCount() == 2) {
+            JOptionPane.showMessageDialog(null, "Remove?");
+        }
+    }//GEN-LAST:event_adminCourseTableMousePressed
     /**
      * This will run the entire program
      */
