@@ -22,7 +22,7 @@ public class Algorithm extends SchedulerUI{
      */
     public int[] scheduler(String[] dates, String selectedCourse, String assignmentType) throws IOException, SQLException{
         /**An int array to hold the possible conflicts on each day.*/
-	int[] conflicts = new int[5];
+	int[] conflicts = new int[31];
 		
         /**An ArrayList to hold the courses.*/
         ArrayList<String> courses = new ArrayList<String>();
@@ -70,7 +70,8 @@ public class Algorithm extends SchedulerUI{
                         }
                     }
                 }
-                JOptionPane.showMessageDialog(null, Arrays.toString(hours));
+                conflicts = hours;
+                //JOptionPane.showMessageDialog(null, Arrays.toString(hours));
             }
             catch(Exception e) {
                 //JOptionPane.showMessageDialog(null, e.getStackTrace());
@@ -108,7 +109,7 @@ public class Algorithm extends SchedulerUI{
                 }
             }
             catch(Exception e) {
-                JOptionPane.showMessageDialog(null, e.getStackTrace());
+                //JOptionPane.showMessageDialog(null, e.getStackTrace());
             }
             return conflicts;
         }

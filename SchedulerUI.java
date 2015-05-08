@@ -307,11 +307,11 @@ public class SchedulerUI extends javax.swing.JFrame {
                 stmt.executeUpdate(sql);
                 
                 taskDescTextField.setText("");
-                firstLabel.setText("");
-                secondLabel.setText("");
-                thirdLabel.setText("");
-                fourthLabel.setText("");
-                fifthLabel.setText("");
+                //firstLabel.setText("");
+                //secondLabel.setText("");
+                //thirdLabel.setText("");
+                //fourthLabel.setText("");
+                //fifthLabel.setText("");
                 CardLayout card = (CardLayout)mainPanel.getLayout();
                 card.show(mainPanel, "calendarCard");
                 refreshCalendar(currentMonth, currentYear);
@@ -322,11 +322,11 @@ public class SchedulerUI extends javax.swing.JFrame {
         }
     }
     /**
-     * This Finds the next five non-weekend days
+     * This finds the next five non-weekend days
      * @return Returns an array of the next three days from the current day
      */
     public String[] nextThreeDays() {
-        String[] nextThreeDays = new String[30];
+        String[] nextThreeDays = new String[31];
         /**This is the calendar to find the start day*/
         Calendar c = Calendar.getInstance();
         java.util.Date start = startDatePicker.getDate();
@@ -334,12 +334,12 @@ public class SchedulerUI extends javax.swing.JFrame {
         c.add(Calendar.DAY_OF_YEAR, 1);
         
         int count = 0;
-        //JOptionPane.showMessageDialog(null, );
+        
         if(c.get(Calendar.DAY_OF_WEEK) == 1 || c.get(Calendar.DAY_OF_WEEK) == 7) {
             int days = (Calendar.SATURDAY - c.get(Calendar.DAY_OF_WEEK) + 2) % 7;  
             c.add(Calendar.DAY_OF_YEAR, days); 
         }
-        while(count < (startDatePicker.getDate().getTime() 
+        while(count < -(startDatePicker.getDate().getTime() 
                 - endDatePicker.getDate().getTime())/86400000) {
             if (c.get(Calendar.DAY_OF_WEEK) == 7) {
                 int days = (Calendar.SATURDAY - c.get(Calendar.DAY_OF_WEEK) + 2) % 7;  
@@ -352,7 +352,7 @@ public class SchedulerUI extends javax.swing.JFrame {
                 c.add(Calendar.DAY_OF_YEAR, 1);
                 count++;
             }
-        }
+        }//JOptionPane.showMessageDialog(null, nextThreeDays[0].toString());
         return nextThreeDays;
     }
     
@@ -406,12 +406,7 @@ public class SchedulerUI extends javax.swing.JFrame {
         addAssignmentPanel = new javax.swing.JPanel();
         assignTaskButton = new javax.swing.JButton();
         suggestButton = new javax.swing.JButton();
-        firstLabel = new javax.swing.JLabel();
-        thirdLabel = new javax.swing.JLabel();
-        secondLabel = new javax.swing.JLabel();
         cancelTaskButton = new javax.swing.JButton();
-        fourthLabel = new javax.swing.JLabel();
-        fifthLabel = new javax.swing.JLabel();
         taskDetailPanel = new javax.swing.JPanel();
         typeTaskComboBox = new javax.swing.JComboBox();
         taskDescTextField = new javax.swing.JTextField();
@@ -422,6 +417,10 @@ public class SchedulerUI extends javax.swing.JFrame {
         startDatePicker = new org.jdesktop.swingx.JXDatePicker();
         firstLabel1 = new javax.swing.JLabel();
         firstLabel2 = new javax.swing.JLabel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        conflictTable = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         manageProfPanel = new javax.swing.JPanel();
         manageProfCoursePanel = new javax.swing.JPanel();
         manageProfCourseComboBox = new javax.swing.JComboBox();
@@ -450,7 +449,6 @@ public class SchedulerUI extends javax.swing.JFrame {
         jScrollPane6 = new javax.swing.JScrollPane();
         adminStudentTable = new javax.swing.JTable();
         adminManageAdminManageLabel = new javax.swing.JLabel();
-        fileChooser = new javax.swing.JFileChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Scheduler");
@@ -569,7 +567,7 @@ public class SchedulerUI extends javax.swing.JFrame {
                 .addComponent(errorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(loginButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1628, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                 .addComponent(aboutButton)
                 .addContainerGap())
         );
@@ -610,7 +608,7 @@ public class SchedulerUI extends javax.swing.JFrame {
         jTextArea2.setForeground(new java.awt.Color(255, 255, 255));
         jTextArea2.setLineWrap(true);
         jTextArea2.setRows(5);
-        jTextArea2.setText("My name is Sam Clement and I am a Computer Science Major at Western Carolina University.");
+        jTextArea2.setText("My name is Sam Clement and I am a Computer Science Major at Western Carolina University. I have a love of computers, and everything that goes with it. I'm excited to graduate and get a job in the industry.");
         jTextArea2.setWrapStyleWord(true);
         jScrollPane3.setViewportView(jTextArea2);
 
@@ -634,10 +632,11 @@ public class SchedulerUI extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 788, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12))
                     .addGroup(aboutPanelLayout.createSequentialGroup()
                         .addComponent(backAboutButton)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -654,18 +653,14 @@ public class SchedulerUI extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(userLabel1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(aboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(aboutPanelLayout.createSequentialGroup()
-                        .addGroup(aboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(backAboutButton)
-                        .addContainerGap())
-                    .addGroup(aboutPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 452, Short.MAX_VALUE))))
+                .addGroup(aboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 347, Short.MAX_VALUE)
+                .addComponent(backAboutButton)
+                .addContainerGap())
         );
 
         mainPanel.add(aboutPanel, "about");
@@ -683,7 +678,7 @@ public class SchedulerUI extends javax.swing.JFrame {
         });
 
         filterComboBox.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        filterComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All", "Test", "Quiz", "Project", "Homework" }));
+        filterComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All", "Test", "Quiz", "Project", "Homework", "Out-of-Class" }));
         filterComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filterComboBoxActionPerformed(evt);
@@ -788,7 +783,7 @@ public class SchedulerUI extends javax.swing.JFrame {
                         .addComponent(yearLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1789, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1028, Short.MAX_VALUE)
                 .addGroup(optionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(courseLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(filterLabel, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -886,12 +881,13 @@ public class SchedulerUI extends javax.swing.JFrame {
             .addGroup(calendarPanelLayout.createSequentialGroup()
                 .addComponent(optionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(calendarScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 2080, Short.MAX_VALUE))
+                .addComponent(calendarScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE))
         );
 
         mainPanel.add(calendarPanel, "calendarCard");
 
         addAssignmentPanel.setBackground(new java.awt.Color(90, 45, 135));
+        addAssignmentPanel.setForeground(new java.awt.Color(255, 255, 255));
 
         assignTaskButton.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         assignTaskButton.setText("Assign Task");
@@ -909,15 +905,6 @@ public class SchedulerUI extends javax.swing.JFrame {
             }
         });
 
-        firstLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        firstLabel.setForeground(new java.awt.Color(255, 255, 255));
-
-        thirdLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        thirdLabel.setForeground(new java.awt.Color(255, 255, 255));
-
-        secondLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        secondLabel.setForeground(new java.awt.Color(255, 255, 255));
-
         cancelTaskButton.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         cancelTaskButton.setText("Cancel");
         cancelTaskButton.addActionListener(new java.awt.event.ActionListener() {
@@ -925,12 +912,6 @@ public class SchedulerUI extends javax.swing.JFrame {
                 cancelTaskButtonActionPerformed(evt);
             }
         });
-
-        fourthLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        fourthLabel.setForeground(new java.awt.Color(255, 255, 255));
-
-        fifthLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        fifthLabel.setForeground(new java.awt.Color(255, 255, 255));
 
         taskDetailPanel.setBackground(new java.awt.Color(90, 45, 135));
         taskDetailPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
@@ -968,7 +949,7 @@ public class SchedulerUI extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(typeTaskComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(taskDatePicker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(taskDatePicker, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE))
                     .addComponent(taskDescTextField))
                 .addContainerGap())
         );
@@ -1039,56 +1020,91 @@ public class SchedulerUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        conflictTable.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        conflictTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Date", "Conflicts"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        conflictTable.setRowHeight(24);
+        jScrollPane9.setViewportView(conflictTable);
+        if (conflictTable.getColumnModel().getColumnCount() > 0) {
+            conflictTable.getColumnModel().getColumn(0).setResizable(false);
+            conflictTable.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Select Range of Dates to Check:");
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Add Information for Assigning a Task:");
+
         javax.swing.GroupLayout addAssignmentPanelLayout = new javax.swing.GroupLayout(addAssignmentPanel);
         addAssignmentPanel.setLayout(addAssignmentPanelLayout);
         addAssignmentPanelLayout.setHorizontalGroup(
             addAssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addAssignmentPanelLayout.createSequentialGroup()
-                .addGroup(addAssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, addAssignmentPanelLayout.createSequentialGroup()
+            .addGroup(addAssignmentPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(addAssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(addAssignmentPanelLayout.createSequentialGroup()
+                        .addComponent(assignTaskButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(cancelTaskButton)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(addAssignmentPanelLayout.createSequentialGroup()
                         .addGroup(addAssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(addAssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(fourthLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(firstLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(secondLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(thirdLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(fifthLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(addAssignmentPanelLayout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addComponent(suggestButton)))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, addAssignmentPanelLayout.createSequentialGroup()
-                        .addContainerGap()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addAssignmentPanelLayout.createSequentialGroup()
                         .addGroup(addAssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(rangePanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(taskDetailPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, addAssignmentPanelLayout.createSequentialGroup()
-                                .addComponent(assignTaskButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(cancelTaskButton)
-                                .addGap(144, 969, Short.MAX_VALUE)))))
-                .addGap(1061, 1061, 1061))
+                            .addComponent(rangePanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(addAssignmentPanelLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(suggestButton))
+                            .addComponent(jScrollPane9))
+                        .addGap(955, 955, 955))))
         );
         addAssignmentPanelLayout.setVerticalGroup(
             addAssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addAssignmentPanelLayout.createSequentialGroup()
+            .addGroup(addAssignmentPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(taskDetailPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rangePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(242, 242, 242)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(suggestButton)
-                .addGap(32, 32, 32)
-                .addComponent(firstLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(secondLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(thirdLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(fourthLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(fifthLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(83, 83, 83)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(taskDetailPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(addAssignmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelTaskButton)
                     .addComponent(assignTaskButton))
@@ -1272,7 +1288,7 @@ public class SchedulerUI extends javax.swing.JFrame {
                     .addGroup(manageProfPanelLayout.createSequentialGroup()
                         .addGap(292, 292, 292)
                         .addComponent(manageProfStudentLabel)
-                        .addContainerGap(1585, Short.MAX_VALUE))
+                        .addContainerGap(834, Short.MAX_VALUE))
                     .addGroup(manageProfPanelLayout.createSequentialGroup()
                         .addGroup(manageProfPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(manageProfStudentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1291,7 +1307,7 @@ public class SchedulerUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(manageProfPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(manageProfPanelLayout.createSequentialGroup()
-                        .addComponent(taskProfTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 2055, Short.MAX_VALUE)
+                        .addComponent(taskProfTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE)
                         .addGap(11, 11, 11)
                         .addComponent(manageProfStudentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(manageProfCoursePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1482,20 +1498,13 @@ public class SchedulerUI extends javax.swing.JFrame {
                     .addComponent(manageAdminLogoutButton)
                     .addComponent(adminManageAdminManageLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(manageAdminTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                .addComponent(manageAdminTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(manageAdminCoursePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         mainPanel.add(manageAdminPanel, "manageAdminCard");
-
-        fileChooser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fileChooserActionPerformed(evt);
-            }
-        });
-        mainPanel.add(fileChooser, "importCard");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1567,6 +1576,10 @@ public class SchedulerUI extends javax.swing.JFrame {
      * This will change the screen to the Add Assignment Screen 
      */
     private void addAssignmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAssignmentButtonActionPerformed
+        DefaultTableModel model = (DefaultTableModel) conflictTable.getModel();
+        while(model.getRowCount() != 0) {
+            model.removeRow(0);
+        }
         CardLayout card = (CardLayout)mainPanel.getLayout();
         card.show(mainPanel, "addAssignmentCard");
     }//GEN-LAST:event_addAssignmentButtonActionPerformed
@@ -1608,16 +1621,8 @@ public class SchedulerUI extends javax.swing.JFrame {
         CardLayout card = (CardLayout)mainPanel.getLayout();
         card.show(mainPanel, "importCard");
     }//GEN-LAST:event_manageProfImportStudentButtonActionPerformed
-    /**
-     * This will assign the selected File to a variable 
-     */
-    private void fileChooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileChooserActionPerformed
-        int returnVal = fileChooser.showOpenDialog(this);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = fileChooser.getSelectedFile();
-        }
-    }//GEN-LAST:event_fileChooserActionPerformed
-    /**
+
+   /**
      * This will remove a student from a professor's course 
      */
     private void manageProfRemoveStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageProfRemoveStudentButtonActionPerformed
@@ -1628,7 +1633,7 @@ public class SchedulerUI extends javax.swing.JFrame {
             rs = pst.executeQuery();
             profManageStudentTable.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getStackTrace());
+            //JOptionPane.showMessageDialog(null, e.getStackTrace());
         }
     }//GEN-LAST:event_manageProfRemoveStudentButtonActionPerformed
     /**
@@ -1684,13 +1689,13 @@ public class SchedulerUI extends javax.swing.JFrame {
         Algorithm al = new Algorithm();
         String selectedCourse = addAssignmentCourseComboBox.getSelectedItem().toString();
         String assignmentType = typeTaskComboBox.getSelectedItem().toString();
-        String[] days = new String[5];
-        int[] conflicts = new int[5];
+        String[] days = new String[31];
+        int[] conflicts = new int[31];
         days = nextThreeDays();
         //JOptionPane.showMessageDialog(null, days[0].toString());
         try {
             conflicts = al.scheduler(days, selectedCourse, assignmentType);
-            JOptionPane.showMessageDialog(null, conflicts[0]);
+            //JOptionPane.showMessageDialog(null, conflicts[0]);
         }
         catch (IOException ex) {
             //Logger.getLogger(SchedulerUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -1699,18 +1704,33 @@ public class SchedulerUI extends javax.swing.JFrame {
             //Logger.getLogger(SchedulerUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         if(assignmentType.equals("Out-of-Class")) {
-            firstLabel.setText(conflicts[0] + "");
-            secondLabel.setText(conflicts[1] + "");
-            thirdLabel.setText(conflicts[2] + "");
-            fourthLabel.setText(conflicts[3] + "");
-            fifthLabel.setText(conflicts[4] + "");
+            DefaultTableModel model = (DefaultTableModel) conflictTable.getModel();
+            while(model.getRowCount() != 0) {
+                model.removeRow(0);
+            }
+            model.addRow(new Object[]{"8:00AM", conflicts[0]});
+            model.addRow(new Object[]{"9:00AM", conflicts[1]});
+            model.addRow(new Object[]{"10:00AM", conflicts[2]});
+            model.addRow(new Object[]{"11:00AM", conflicts[3]});
+            model.addRow(new Object[]{"12:00AM", conflicts[4]});
+            model.addRow(new Object[]{"1:00PM", conflicts[5]});
+            model.addRow(new Object[]{"2:00PM", conflicts[6]});
+            model.addRow(new Object[]{"3:00PM", conflicts[7]});
+            model.addRow(new Object[]{"4:00PM", conflicts[8]});
+            model.addRow(new Object[]{"5:00PM", conflicts[9]});
+            model.addRow(new Object[]{"6:00PM", conflicts[10]});
+            model.addRow(new Object[]{"7:00PM", conflicts[11]});
         }
         else {
-            firstLabel.setText("1st date: " + conflicts[0] + " conflicts on " + days[0]);
-            secondLabel.setText("2nd date: " + conflicts[1] + " conflicts on " + days[1]);
-            thirdLabel.setText("3rd date: " + conflicts[2] + " conflicts on " + days[2]);
-            fourthLabel.setText("4th date: " + conflicts[3] + " conflicts on " + days[3]);
-            fifthLabel.setText("5th date: " + conflicts[4] + " conflicts on " + days[4]);
+            DefaultTableModel model = (DefaultTableModel) conflictTable.getModel();
+            while(model.getRowCount() != 0) {
+                model.removeRow(0);
+            }
+            int i = 0;
+            while(!days[i].equals("")) {
+                model.addRow(new Object[]{days[i], conflicts[i]});
+                i++;
+            }
         }
     }//GEN-LAST:event_suggestButtonActionPerformed
     /**
@@ -1727,11 +1747,10 @@ public class SchedulerUI extends javax.swing.JFrame {
 
     private void cancelTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelTaskButtonActionPerformed
         taskDescTextField.setText("");
-        firstLabel.setText("");
-        secondLabel.setText("");
-        thirdLabel.setText("");
-        fourthLabel.setText("");
-        fifthLabel.setText("");
+        DefaultTableModel model = (DefaultTableModel) conflictTable.getModel();
+            while(model.getRowCount() != 0) {
+                model.removeRow(0);
+            }
         CardLayout card = (CardLayout)mainPanel.getLayout();
         card.show(mainPanel, "calendarCard");
     }//GEN-LAST:event_cancelTaskButtonActionPerformed
@@ -1832,7 +1851,7 @@ public class SchedulerUI extends javax.swing.JFrame {
             }
             updateAdminLists();
         } catch (SQLException ex) {
-            Logger.getLogger(SchedulerUI.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(SchedulerUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_manageAdminAddCourseButtonActionPerformed
 
@@ -1892,7 +1911,7 @@ public class SchedulerUI extends javax.swing.JFrame {
                     } 
                 }
             } catch (SQLException ex) {
-                    Logger.getLogger(SchedulerUI.class.getName()).log(Level.SEVERE, null, ex);
+                    //Logger.getLogger(SchedulerUI.class.getName()).log(Level.SEVERE, null, ex);
             }
             updateAdminLists();
         }
@@ -1992,7 +2011,7 @@ public class SchedulerUI extends javax.swing.JFrame {
                     } 
                 }
             } catch (SQLException ex) {
-                    Logger.getLogger(SchedulerUI.class.getName()).log(Level.SEVERE, null, ex);
+                    //Logger.getLogger(SchedulerUI.class.getName()).log(Level.SEVERE, null, ex);
             }
             updateAdminLists();
         }
@@ -2049,7 +2068,7 @@ public class SchedulerUI extends javax.swing.JFrame {
                     } 
                 }
             } catch (SQLException ex) {
-                    Logger.getLogger(SchedulerUI.class.getName()).log(Level.SEVERE, null, ex);
+                    //Logger.getLogger(SchedulerUI.class.getName()).log(Level.SEVERE, null, ex);
             }
             updateAdminLists();
         }
@@ -2102,22 +2121,21 @@ public class SchedulerUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane calendarScrollPane;
     private javax.swing.JTable calendarTable;
     private javax.swing.JButton cancelTaskButton;
+    private javax.swing.JTable conflictTable;
     private javax.swing.JLabel courseLabel;
     private org.jdesktop.swingx.JXDatePicker endDatePicker;
     private javax.swing.JLabel errorLabel;
-    private javax.swing.JLabel fifthLabel;
-    private javax.swing.JFileChooser fileChooser;
     private javax.swing.JComboBox filterComboBox;
     private javax.swing.JLabel filterLabel;
-    private javax.swing.JLabel firstLabel;
     private javax.swing.JLabel firstLabel1;
     private javax.swing.JLabel firstLabel2;
-    private javax.swing.JLabel fourthLabel;
     private javax.swing.JLabel infoLabel1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -2126,6 +2144,7 @@ public class SchedulerUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JButton loginButton;
@@ -2157,14 +2176,12 @@ public class SchedulerUI extends javax.swing.JFrame {
     private javax.swing.JTable profManageStudentTable;
     private javax.swing.JTable profManageTaskTable;
     private javax.swing.JPanel rangePanel;
-    private javax.swing.JLabel secondLabel;
     private org.jdesktop.swingx.JXDatePicker startDatePicker;
     private javax.swing.JButton suggestButton;
     private org.jdesktop.swingx.JXDatePicker taskDatePicker;
     private javax.swing.JTextField taskDescTextField;
     private javax.swing.JPanel taskDetailPanel;
     private javax.swing.JTabbedPane taskProfTabbedPane;
-    private javax.swing.JLabel thirdLabel;
     private javax.swing.JLabel titleLabel1;
     private javax.swing.JComboBox typeTaskComboBox;
     private javax.swing.JLabel userLabel;
